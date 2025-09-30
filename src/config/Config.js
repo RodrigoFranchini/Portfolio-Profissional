@@ -24,12 +24,12 @@ export const sobremim = {
 // Lista de projetos do portfólio
 export const projetos = [
   {
-    id: "curso-api",
-    nome: "Curso API",
+    id: "entregas-api",
+    nome: "Sistema de Entregas Urbanas API",
     descricao:
-      "API RESTful desenvolvida com Spring Boot, a API permite gerenciar cursos, sendo projetada para ser facilmente extensível.",
+      "API RESTful desenvolvida com Spring Boot, a API permite gerenciar entregas urbanas com uso de drones, sendo projetada para ser facilmente extensível.",
     tecnologias: ["Java", "Spring Boot", "H2"],
-    github: "https://github.com/RodrigoFranchini/curso-api-spring",
+    github: "https://github.com/RodrigoFranchini/Simulador-de-Entregas-Urbanas-API",
     imagem: "Cursosapi.png" 
   },
   {
@@ -69,7 +69,7 @@ export const carreira = [
     cargo: "Estagiário",
     periodo: "Dez 2023 – Março 2025",
     descricao:
-      "Suporte ao time de analistas e aos softwares do órgão, com foco na automação de workflows e criação de dashboards para acompanhamento de indicadores.."
+      "Suporte ao time de analistas e aos softwares do órgão, com foco na automação de workflows e criação de dashboards para acompanhamento de métricas.",
   }
 ];
 
@@ -77,7 +77,7 @@ export const carreira = [
 export const contatos = {
   email: "rofranchinicecchin@gmail.com",
   whatsapp: "5531999539901", 
-  linkedin: "https://www.linkedin.com/in/rodrigo-franchini-cecchin-b394a9304/",
+  linkedin: "https://www.linkedin.com/in/rodrigofranchini/",
   github: "https://github.com/RodrigoFranchini"
 };
 

@@ -6,7 +6,7 @@ export default function SobreMim() {
     <section id="home" className="sobre-mim">
       <div className="sobre-mim__container">
         <div className="sobre-mim__imagem">
-          <img src="Homepic.png" alt={profile.name} />
+          <img src="Foto de Perfil.jpeg" alt={profile.name} />
         </div>
 
         <div className="sobre-mim__texto">
