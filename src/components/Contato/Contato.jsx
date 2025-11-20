@@ -1,6 +1,5 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef, useState } from "react";
 import { FaEnvelope, FaWhatsapp, FaLinkedin, FaGithub, FaPaperPlane } from "react-icons/fa";
-import emailjs from "@emailjs/browser";
 import { contatos } from "../../config/Config";
 import "./Contato.css";
 
@@ -8,19 +7,7 @@ export default function Contato() {
   const formRef = useRef(null);
   const [status, setStatus] = useState({ type: "", message: "" });
 
-  const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
-  const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
-  const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
-
-  useEffect(() => {
-    try {
-      if (publicKey && emailjs.init) {
-        emailjs.init(publicKey);
-      }
-    } catch (e) {
-      console.error("Falha ao inicializar EmailJS:", e);
-    }
-  }, [publicKey]);
+  const accessKey = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY;
 
   function handleWhatsAppUrl() {
     const base = `https://wa.me/${contatos.whatsapp}`;
@@ -29,8 +16,8 @@ export default function Contato() {
   }
 
   function validate(form) {
-    const name = form.from_name.value.trim();
-    const email = form.reply_to.value.trim();
+    const name = form.name.value.trim();
+    const email = form.email.value.trim();
     const message = form.message.value.trim();
     if (name.length < 2) return "Informe seu nome completo.";
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return "Informe um e-mail válido.";
@@ -42,12 +29,10 @@ export default function Contato() {
     e.preventDefault();
     const form = formRef.current;
 
-    if (!publicKey || !serviceId || !templateId) {
-      console.warn("ENV ausente:", { publicKey, serviceId, templateId });
+    if (!accessKey) {
       setStatus({
         type: "error",
-        message:
-          "Configuração de envio ausente. Verifique seu .env (VITE_EMAILJS_PUBLIC_KEY / SERVICE_ID / TEMPLATE_ID) e reinicie o dev server."
+        message: "Configuração ausente. Configure VITE_WEB3FORMS_ACCESS_KEY no .env"
       });
       return;
     }
@@ -61,24 +46,31 @@ export default function Contato() {
     try {
       setStatus({ type: "loading", message: "Enviando..." });
 
-      if (!form.title) {
-        const hidden = document.createElement("input");
-        hidden.type = "hidden";
-        hidden.name = "title";
-        hidden.value = "Contato pelo Portfólio";
-        form.appendChild(hidden);
-      }
+      const formData = new FormData(form);
+      formData.append("access_key", accessKey);
 
-      const res = await emailjs.sendForm(serviceId, templateId, form, { publicKey });
-      console.log("EmailJS OK:", res);
-      setStatus({ type: "success", message: "Mensagem enviada com sucesso! 🎉" });
-      form.reset();
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: formData
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        setStatus({ type: "success", message: "Mensagem enviada com sucesso! 🎉" });
+        form.reset();
+      } else {
+        console.error("Web3Forms error:", data);
+        setStatus({
+          type: "error",
+          message: data.message || "Erro ao enviar. Tente novamente."
+        });
+      }
     } catch (err) {
-      console.error("EmailJS error:", err);
+      console.error("Error:", err);
       setStatus({
         type: "error",
-        message:
-          "Não foi possível enviar agora. Confira os IDs do EmailJS e tente novamente (veja o console para detalhes)."
+        message: "Não foi possível enviar agora. Tente novamente mais tarde."
       });
     }
   }
@@ -115,13 +107,13 @@ export default function Contato() {
 
       <form ref={formRef} className="contato__form" onSubmit={onSubmit} noValidate>
         <div className="form-row">
-          <label htmlFor="from_name">Nome</label>
-          <input id="from_name" name="from_name" type="text" placeholder="Seu nome" required />
+          <label htmlFor="name">Nome</label>
+          <input id="name" name="name" type="text" placeholder="Seu nome" required />
         </div>
 
         <div className="form-row">
-          <label htmlFor="reply_to">E-mail</label>
-          <input id="reply_to" name="reply_to" type="email" placeholder="voce@exemplo.com" required />
+          <label htmlFor="email">E-mail</label>
+          <input id="email" name="email" type="email" placeholder="voce@exemplo.com" required />
         </div>
 
         <div className="form-row">
