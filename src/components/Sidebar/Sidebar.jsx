@@ -1,7 +1,8 @@
 import { useState, useEffect, useRef } from "react";
+import { createPortal } from "react-dom";
 import {
   FaHome, FaIdBadge, FaFolderOpen, FaInfoCircle, FaPaperPlane,
-  FaAngleDoubleLeft, FaAngleDoubleRight
+  FaAngleDoubleLeft, FaAngleDoubleRight, FaDownload
 } from "react-icons/fa";
 import { profile, navItems } from "../../config/Config.js";
 import "./Sidebar.css";
@@ -17,6 +18,7 @@ const iconMap = {
 export default function Sidebar() {
   const [expanded, setExpanded] = useState(false);
   const [current, setCurrent] = useState(navItems?.[0]?.key || null);
+  const [showDownloadModal, setShowDownloadModal] = useState(false);
   const currentRef = useRef(current);        
   const sidebarRef = useRef(null);
 
@@ -86,10 +88,11 @@ export default function Sidebar() {
   }, []);
 
   return (
-    <aside
-      ref={sidebarRef}
-      className={`sidebar ${expanded ? "expanded" : ""}`}
-    >
+    <>
+      <aside
+        ref={sidebarRef}
+        className={`sidebar ${expanded ? "expanded" : ""}`}
+      >
       <div className="sidebar__content">
         <div className="sidebar__brand">
           <div className="brand__avatar">{profile.initials}</div>
@@ -112,7 +115,8 @@ export default function Sidebar() {
               onClick={() => {
                 const section = document.getElementById(it.key);
                 if (section) {
-                  section.scrollIntoView({ behavior: "smooth", block: "start" });
+                  const scrollPosition = it.key === "projects" ? "start" : "center";
+                  section.scrollIntoView({ behavior: "smooth", block: scrollPosition });
                 }
                 currentRef.current = it.key;
                 setCurrent(it.key);
@@ -123,6 +127,20 @@ export default function Sidebar() {
               {expanded && <span className="nav__label">{it.label}</span>}
             </button>
           ))}
+
+          {profile.cvUrl && (
+            <button
+              type="button"
+              className="nav__item nav__item--download"
+              onClick={() => {
+                setShowDownloadModal(true);
+                setExpanded(false);
+              }}
+            >
+              <span className="nav__icon"><FaDownload /></span>
+              {expanded && <span className="nav__label">Download CV</span>}
+            </button>
+          )}
         </nav>
       </div>
 
@@ -135,6 +153,39 @@ export default function Sidebar() {
       >
         {expanded ? <FaAngleDoubleLeft /> : <FaAngleDoubleRight />}
       </button>
-    </aside>
+      </aside>
+
+      {showDownloadModal && createPortal(
+        <div className="download-modal-overlay" onClick={() => setShowDownloadModal(false)}>
+          <div className="download-modal" onClick={(e) => e.stopPropagation()}>
+            <div className="download-modal__icon">
+              <FaDownload />
+            </div>
+            <h3 className="download-modal__title">Baixar Currículo?</h3>
+            <p className="download-modal__message">
+              O arquivo será baixado em formato PDF
+            </p>
+            <div className="download-modal__actions">
+              <button
+                className="download-modal__btn download-modal__btn--cancel"
+                onClick={() => setShowDownloadModal(false)}
+              >
+                Cancelar
+              </button>
+              <a
+                href={profile.cvUrl}
+                download="Rodrigo_Franchini_CV.pdf"
+                className="download-modal__btn download-modal__btn--confirm"
+                onClick={() => setShowDownloadModal(false)}
+              >
+                <FaDownload />
+                Baixar
+              </a>
+            </div>
+          </div>
+        </div>,
+        document.body
+      )}
+    </>
   );
 }

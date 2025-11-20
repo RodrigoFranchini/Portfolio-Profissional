@@ -3,6 +3,7 @@ export const profile = {
   initials: "RF",
   name: "Rodrigo Franchini Cecchin",
   role: "Desenvolvedor",
+  cvUrl: "Curriculo - Rodrigo Franchini Cecchin.pdf", // Coloque o arquivo cv.pdf na pasta public
 };
 
 // Define os ícones da sidebar

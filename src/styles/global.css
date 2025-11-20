@@ -18,7 +18,7 @@ body {
 @media (max-width: 768px) {
   .main-content {
     margin-left: 0;
-    margin-bottom: 80px;
+    margin-bottom: 64px;
     padding: 16px;
   }
 }
