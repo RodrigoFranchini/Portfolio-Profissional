@@ -66,12 +66,41 @@
     gap: 24px;
   }
 
-  .sobre-mim__imagem img {
+  .sobre-mim__imagem {
+    width: 180px;
+    height: 180px;
+    margin: 0 auto;
+  }
+
+  .sobre-mim__titulo {
+    text-align: center;
+  }
+}
+
+@media (max-width: 768px) {
+  .sobre-mim {
+    padding: 32px 16px 48px;
+  }
+
+  .sobre-mim__container {
+    gap: 20px;
+  }
+
+  .sobre-mim__imagem {
     width: 160px;
     height: 160px;
   }
 
   .sobre-mim__titulo {
-    text-align: center;
+    font-size: 1.5rem;
+  }
+
+  .sobre-mim__subtitulo {
+    font-size: 0.8rem;
+  }
+
+  .sobre-mim__paragrafo {
+    font-size: 0.95rem;
+    text-align: left;
   }
 }

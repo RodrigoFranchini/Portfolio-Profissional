@@ -10,7 +10,7 @@ export default function App() {
   return (
     <>
       <Sidebar />
-      <main style={{ marginLeft: 72, padding: "24px" }}>
+      <main className="main-content">
           <SobreMim />
           <Projetos />
           <Carreira />

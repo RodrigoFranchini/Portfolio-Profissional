@@ -8,3 +8,17 @@ body {
   color: var(--text);
   font-family: JetBrains Mono, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, "Noto Sans", "Helvetica Neue", Arial;
 }
+
+.main-content {
+  margin-left: 72px;
+  padding: 24px;
+  transition: margin 300ms ease;
+}
+
+@media (max-width: 768px) {
+  .main-content {
+    margin-left: 0;
+    margin-bottom: 80px;
+    padding: 16px;
+  }
+}

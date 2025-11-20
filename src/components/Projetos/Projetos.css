@@ -122,3 +122,39 @@
     aspect-ratio: 16 / 9;
   }
 }
+
+@media (max-width: 768px) {
+  .projetos {
+    padding: 32px 16px 48px;
+  }
+
+  .projetos__header h1 {
+    font-size: 1.6rem;
+  }
+
+  .projetos__header p {
+    font-size: 0.95rem;
+  }
+
+  .projeto-card {
+    padding: 14px 16px;
+  }
+
+  .projeto-card__title {
+    font-size: 1rem;
+  }
+
+  .projeto-card__desc {
+    font-size: 0.9rem;
+  }
+
+  .tag {
+    font-size: 0.7rem;
+    padding: 3px 7px;
+  }
+
+  .btn {
+    font-size: 0.85rem;
+    padding: 7px 10px;
+  }
+}
