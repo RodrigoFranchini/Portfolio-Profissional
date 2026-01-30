@@ -67,10 +67,18 @@ export const carreira = [
   {
     id: "exp1",
     empresa: "Assembleia Legislativa do Estado de Minas Gerais",
-    cargo: "Estagiário",
+    cargo: "Estagiário de Aplicações e Suporte",
     periodo: "Dez 2023 – Março 2025",
     descricao:
       "Suporte ao time de analistas e aos softwares do órgão, com foco na automação de workflows e criação de dashboards para acompanhamento de métricas.",
+  }, 
+  {
+    id: "exp2",
+    empresa: "Offerwise",
+    cargo: "Estagiário de Produtos",
+    periodo: "Jan 2026 – Presente",
+    descricao:
+      "Apoio a trilha de desenvolvimento de produtos, a análise e a evolução de soluções de pesquisa de mercado. A fim de garantir entregas alinhadas às necessidades do mercado e dos clientes.",
   }
 ];
 
