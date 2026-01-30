@@ -15,12 +15,6 @@ export default function SobreMim() {
           <h2 className="sobre-mim__subtitulo">Sobre Mim</h2>
           <p className="sobre-mim__paragrafo">{sobremim.texto1ptbr}</p>
           <p className="sobre-mim__paragrafo">{sobremim.texto2ptbr}</p>
-
-          <h2 className="sobre-mim__subtitulo sobre-mim__subtitulo--alt">
-            About Me
-          </h2>
-          <p className="sobre-mim__paragrafo">{sobremim.texto1eng}</p>
-          <p className="sobre-mim__paragrafo">{sobremim.texto2eng}</p>
         </div>
       </div>
     </section>
