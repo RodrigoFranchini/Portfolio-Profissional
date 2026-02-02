@@ -1,10 +1,6 @@
 .sobre-mim {
   width: 100%;
-  min-height: 75vh;
-  padding: 80px 24px 100px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  padding: 56px 24px 80px;
 }
 
 .sobre-mim__container {

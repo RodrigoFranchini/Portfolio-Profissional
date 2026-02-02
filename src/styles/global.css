@@ -10,9 +10,15 @@ body {
 }
 
 .main-content {
-  margin-left: 72px;
+  margin-left: var(--sb-collapsed);
   padding: 24px;
-  transition: margin 300ms ease;
+  transition: transform var(--sb-dur) var(--sb-ease);
+  will-change: transform;
+}
+
+.main-content.shifted {
+  transform: translateX(calc((var(--sb-expanded) - var(--sb-collapsed)) / 2));
+  backface-visibility: hidden;
 }
 
 @media (max-width: 768px) {
@@ -20,5 +26,9 @@ body {
     margin-left: 0;
     margin-bottom: 64px;
     padding: 16px;
+  }
+
+  .main-content.shifted {
+    transform: none;
   }
 }

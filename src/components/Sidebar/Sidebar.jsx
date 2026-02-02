@@ -35,6 +35,26 @@ export default function Sidebar() {
   }, [expanded]);
 
   useEffect(() => {
+    const main = document.querySelector('.main-content');
+    if (!main) return;
+
+    const apply = () => {
+      if (expanded && window.matchMedia('(min-width: 769px)').matches) {
+        main.classList.add('shifted');
+      } else {
+        main.classList.remove('shifted');
+      }
+    };
+
+    apply();
+    window.addEventListener('resize', apply);
+    return () => {
+      window.removeEventListener('resize', apply);
+      main.classList.remove('shifted');
+    };
+  }, [expanded]);
+
+  useEffect(() => {
     const sections = navItems
       .map(it => document.getElementById(it.key))
       .filter(Boolean);
