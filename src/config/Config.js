@@ -23,13 +23,12 @@ export const sobremim = {
 // Lista de projetos do portfólio
 export const projetos = [
   {
-    id: "entregas-api",
-    nome: "Sistema de Entregas Urbanas API",
-    descricao:
-      "API RESTful desenvolvida com Spring Boot, a API permite gerenciar entregas urbanas com uso de drones, sendo projetada para ser facilmente extensível.",
-    tecnologias: ["Java", "Spring Boot", "H2"],
-    github: "https://github.com/RodrigoFranchini/Simulador-de-Entregas-Urbanas-API",
-    imagem: "Cursosapi.png" 
+    id: "pokedex-tracker",
+    nome: "Pokédex Tracker",
+    descricao: "Aplicação Full Stack que permite aos usuários acompanhar e gerenciar suas coleções de Pokémon, com funcionalidades de busca, filtragem e tracking cross device.",
+    tecnologias: ["TypeScript", "React", "Java", "Spring Boot", "Postgres", "Docker"],
+    github: "https://github.com/RodrigoFranchini/pokedex-tracker",
+    imagem: "Pokedex-Tracker.png" 
   },
   {
     id: "sistema-login-firebase",
@@ -41,13 +40,13 @@ export const projetos = [
     imagem: "HOExtra.png" 
   },
   {
-    id: "desenvolvimento-web-full-stack",
-    nome: "Desenvolvimento Web Full Stack",
+    id: "entregas-api",
+    nome: "Sistema de Entregas Urbanas API",
     descricao:
-      "Projeto de documentação e desenvolvimento de uma aplicação para a matéria Desenvolvimento Web.",
-    tecnologias: ["React", "Node.js"],
-    github: "https://github.com/RodrigoFranchini/Projeto-Dev.-Web-Full-Stack",
-    imagem: "web-full-stack.png" 
+      "API RESTful desenvolvida com Spring Boot, a API permite gerenciar entregas urbanas com uso de drones, sendo projetada para ser facilmente extensível.",
+    tecnologias: ["Java", "Spring Boot", "H2"],
+    github: "https://github.com/RodrigoFranchini/Simulador-de-Entregas-Urbanas-API",
+    imagem: "Cursosapi.png" 
   },
   {
     id: "java-atividades",
