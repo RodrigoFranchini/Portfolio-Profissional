@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
 import {
   FaHome, FaIdBadge, FaFolderOpen, FaInfoCircle, FaPaperPlane,
-  FaAngleDoubleLeft, FaAngleDoubleRight, FaDownload
+  FaAngleDoubleLeft, FaAngleDoubleRight, FaDownload, FaRobot
 } from "react-icons/fa";
 import { profile, navItems } from "../../config/Config.js";
 import "./Sidebar.css";
@@ -13,6 +13,7 @@ const iconMap = {
   folder: <FaFolderOpen />,
   info:   <FaInfoCircle />,
   send:   <FaPaperPlane />,
+  robot:  <FaRobot />,
 };
 
 export default function Sidebar() {

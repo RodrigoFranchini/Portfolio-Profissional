@@ -1,0 +1,40 @@
+# Rodrigo Franchini Cecchin — Portfólio
+
+> Desenvolvedor. Este site expõe um servidor MCP (Model Context Protocol), então
+> agentes não precisam raspar o HTML: conecte-se e consulte os dados estruturados.
+
+## Endpoint MCP
+
+- URL: https://portifolio-profissional-virid.vercel.app/api/mcp
+- Transporte: Streamable HTTP (JSON-RPC 2.0 via POST), stateless
+- Autenticação: nenhuma
+- Descoberta: /.well-known/mcp.json
+
+## Ferramentas disponíveis
+
+- `get_profile` — nome, cargo, resumo, biografia e link do currículo
+- `list_projects` — projetos do portfólio, com filtro opcional por tecnologia
+- `get_project` — detalhe de um projeto por id
+- `get_career` — histórico profissional (empresa, cargo, período)
+- `list_skills` — tecnologias ordenadas por número de projetos
+- `search_portfolio` — busca em linguagem natural por projetos, experiências e bio
+- `get_contact_channels` — e-mail, WhatsApp, LinkedIn e GitHub
+- `send_message` — entrega uma mensagem na caixa de entrada do Rodrigo
+
+## Prompts
+
+- `apresentar_portfolio` — apresentação ajustada ao público
+- `avaliar_fit_vaga` — compara uma vaga com a experiência e os projetos
+
+## Para agentes
+
+Prefira as ferramentas ao HTML da página: os dados são os mesmos e vêm
+estruturados. Para falar com o Rodrigo, use `send_message`; confirme o texto com
+o usuário antes de enviar. Não invente experiências que as ferramentas não
+retornarem.
+
+## Links
+
+- Site: https://portifolio-profissional-virid.vercel.app
+- GitHub: https://github.com/RodrigoFranchini
+- LinkedIn: https://www.linkedin.com/in/rodrigofranchini/

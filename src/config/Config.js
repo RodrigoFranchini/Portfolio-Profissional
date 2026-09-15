@@ -9,10 +9,30 @@ export const profile = {
 // Define os ícones da sidebar
 export const navItems = [
   { key: "home", label: "Home", icon: "home" },
+  { key: "agents", label: "Agentes (MCP)", icon: "robot" },
   { key: "projects", label: "Projetos", icon: "folder" },
   { key: "career", label: "Carreira", icon: "id" },
   { key: "contact", label: "Contato", icon: "send" },
 ];
+
+// Servidor MCP: permite que agentes de IA consultem este portfólio e enviem mensagens.
+export const mcp = {
+  endpoint: "https://portifolio-profissional-virid.vercel.app/api/mcp",
+  transport: "Streamable HTTP",
+  repoUrl: "https://github.com/RodrigoFranchini/Portifolio-Profissional",
+  descricao:
+    "Este portfólio não é só uma página: ele é também um servidor MCP. Agentes de IA podem se conectar, consultar meus projetos e minha experiência em dados estruturados e me enviar uma mensagem direta — sem precisar ler o HTML.",
+  ferramentas: [
+    { nome: "get_profile", descricao: "Perfil, resumo e link do currículo." },
+    { nome: "list_projects", descricao: "Projetos, com filtro por tecnologia." },
+    { nome: "get_project", descricao: "Detalhe de um projeto específico." },
+    { nome: "get_career", descricao: "Histórico profissional completo." },
+    { nome: "list_skills", descricao: "Tecnologias por número de projetos." },
+    { nome: "search_portfolio", descricao: "Busca em linguagem natural." },
+    { nome: "get_contact_channels", descricao: "Canais diretos de contato." },
+    { nome: "send_message", descricao: "Envia uma mensagem à minha caixa de entrada." },
+  ],
+};
 
 // Define o texto que irá aparecer na seção sobre mim
 export const sobremim = {

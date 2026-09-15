@@ -1,5 +1,5 @@
 {
-  "name": "lab_desenvolvimento",
+  "name": "portifolio-profissional",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -7,12 +7,20 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "mcp": "node --env-file-if-exists=.env mcp/stdio.js",
+    "mcp:http": "node --env-file-if-exists=.env mcp/http.js",
+    "mcp:inspect": "npx -y @modelcontextprotocol/inspector node --env-file-if-exists=.env mcp/stdio.js",
+    "mcp:test": "node --env-file-if-exists=.env mcp/test-client.js",
+    "mcp:test:vercel": "node mcp/test-vercel.js",
+    "mcp:verify": "npm run mcp:test && npm run mcp:test:vercel"
   },
   "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.30.0",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
-    "react-icons": "^5.5.0"
+    "react-icons": "^5.5.0",
+    "zod": "^3.25.76"
   },
   "devDependencies": {
     "@eslint/js": "^9.33.0",
@@ -24,5 +32,12 @@
     "eslint-plugin-react-refresh": "^0.4.20",
     "globals": "^16.3.0",
     "vite": "^7.1.2"
+  },
+  "description": "Portfólio profissional de Rodrigo Franchini com servidor MCP para agentes.",
+  "bin": {
+    "portfolio-mcp": "mcp/stdio.js"
+  },
+  "engines": {
+    "node": ">=20.6.0"
   }
 }

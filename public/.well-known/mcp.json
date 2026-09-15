@@ -1,0 +1,37 @@
+{
+  "name": "portfolio-rodrigo-franchini",
+  "title": "Portfólio de Rodrigo Franchini",
+  "description": "Servidor MCP com o perfil, os projetos, a carreira e um canal de contato direto com Rodrigo Franchini Cecchin.",
+  "version": "1.0.0",
+  "website": "https://portifolio-profissional-virid.vercel.app",
+  "endpoints": [
+    {
+      "type": "streamable-http",
+      "url": "https://portifolio-profissional-virid.vercel.app/api/mcp",
+      "authentication": "none"
+    }
+  ],
+  "capabilities": {
+    "tools": [
+      "get_profile",
+      "list_projects",
+      "get_project",
+      "get_career",
+      "list_skills",
+      "search_portfolio",
+      "get_contact_channels",
+      "send_message"
+    ],
+    "resources": [
+      "portfolio://profile",
+      "portfolio://projects",
+      "portfolio://career",
+      "portfolio://resume"
+    ],
+    "prompts": ["apresentar_portfolio", "avaliar_fit_vaga"]
+  },
+  "contact": {
+    "email": "rofranchinicecchin@gmail.com",
+    "github": "https://github.com/RodrigoFranchini"
+  }
+}

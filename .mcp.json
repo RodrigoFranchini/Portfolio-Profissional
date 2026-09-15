@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "portfolio": {
+      "command": "node",
+      "args": [
+        "--env-file-if-exists=.env",
+        "mcp/stdio.js"
+      ],
+      "env": {}
+    }
+  }
+}
