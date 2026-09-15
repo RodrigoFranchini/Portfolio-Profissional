@@ -141,18 +141,21 @@ Copie `.env.example` para `.env`:
 | Variável | Escopo | Necessária? |
 | --- | --- | --- |
 | `VITE_WEB3FORMS_ACCESS_KEY` | Browser | Formulário de contato do site |
-| `WEB3FORMS_ACCESS_KEY` | Servidor | Tool `send_message` |
+| `RESEND_API_KEY` | Servidor | Tool `send_message` |
+| `RESEND_FROM` | Servidor | Opcional; remetente com domínio verificado |
+| `CONTACT_TO_EMAIL` | Servidor | Opcional; destinatário (padrão: e-mail do `Config.js`) |
 | `PORTFOLIO_SITE_URL` | Servidor | Opcional; links absolutos |
 
-`VITE_WEB3FORMS_ACCESS_KEY` só existe no bundle do browser — a função serverless
-não enxerga essa variável. Por isso a mesma chave precisa aparecer também como
-`WEB3FORMS_ACCESS_KEY`, sem o prefixo `VITE_`.
+O `send_message` usa o [Resend](https://resend.com) em vez do Web3Forms: no plano
+gratuito do Web3Forms o Cloudflare bloqueia com 403 envios feitos por servidor.
+Sem `RESEND_FROM`, o remetente é `onboarding@resend.dev`, que só entrega para o
+e-mail dono da conta Resend.
 
 Localmente os scripts `mcp*` carregam o `.env` via `--env-file-if-exists` (Node
 20.6+), então basta preencher o arquivo. Em produção, configure a variável no
 painel da Vercel.
 
-Sem `WEB3FORMS_ACCESS_KEY` o servidor MCP continua funcionando normalmente: a
+Sem `RESEND_API_KEY` o servidor MCP continua funcionando normalmente: a
 tool `send_message` apenas responde com os canais diretos de contato em vez de
 entregar a mensagem.
 
@@ -161,7 +164,7 @@ entregar a mensagem.
 ## ☁️ Deploy
 
 Hospedado na Vercel. O `vercel.json` publica o site estático a partir de `dist/`
-e a função serverless de `api/mcp.js`. Configure `WEB3FORMS_ACCESS_KEY` nas
+e a função serverless de `api/mcp.js`. Configure `RESEND_API_KEY` nas
 variáveis de ambiente do projeto na Vercel para habilitar o `send_message`.
 
 🔗 [Acesse meu portfólio](https://portifolio-profissional-virid.vercel.app/)

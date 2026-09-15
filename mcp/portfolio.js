@@ -132,35 +132,41 @@ export function searchPortfolio(query, limit = 10) {
 }
 
 /**
- * Entrega a mensagem de um agente ao dono do portfólio via Web3Forms —
- * o mesmo backend usado pelo formulário de contato do site.
+ * Entrega a mensagem de um agente ao dono do portfólio via Resend.
+ * O Web3Forms (usado pelo formulário do site) não serve aqui: no plano gratuito
+ * o Cloudflare bloqueia com 403 qualquer envio que não venha de um navegador.
  */
 export async function deliverMessage({ from, contact, message, agent }) {
-  const accessKey = process.env.WEB3FORMS_ACCESS_KEY;
-  if (!accessKey) {
+  const apiKey = process.env.RESEND_API_KEY;
+  if (!apiKey) {
     return {
       delivered: false,
       reason:
-        "WEB3FORMS_ACCESS_KEY não configurada no servidor. Use os canais diretos retornados por get_contact_channels.",
+        "RESEND_API_KEY não configurada no servidor. Use os canais diretos retornados por get_contact_channels.",
       fallback: getContactChannels(),
     };
   }
 
-  const response = await fetch("https://api.web3forms.com/submit", {
+  const response = await fetch("https://api.resend.com/emails", {
     method: "POST",
-    headers: { "Content-Type": "application/json", Accept: "application/json" },
+    headers: {
+      Authorization: `Bearer ${apiKey}`,
+      "Content-Type": "application/json",
+    },
     body: JSON.stringify({
-      access_key: accessKey,
+      // onboarding@resend.dev só entrega para o e-mail da própria conta Resend;
+      // com domínio verificado, defina RESEND_FROM.
+      from: process.env.RESEND_FROM || "Portfólio MCP <onboarding@resend.dev>",
+      to: [process.env.CONTACT_TO_EMAIL || contatos.email],
+      reply_to: contact,
       subject: `[MCP] Mensagem de ${from}`,
-      from_name: from,
-      email: contact,
-      message: `Origem: servidor MCP do portfólio\nAgente: ${agent || "não informado"}\n\n${message}`,
+      text: `Origem: servidor MCP do portfólio\nDe: ${from} <${contact}>\nAgente: ${agent || "não informado"}\n\n${message}`,
     }),
   });
 
   const data = await response.json().catch(() => ({}));
 
-  if (!response.ok || !data.success) {
+  if (!response.ok || !data.id) {
     return {
       delivered: false,
       reason: data.message || `Falha no envio (HTTP ${response.status}).`,
