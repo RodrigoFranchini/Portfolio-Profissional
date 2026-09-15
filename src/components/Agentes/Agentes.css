@@ -182,27 +182,60 @@
 
 @media (max-width: 768px) {
   .agentes {
-    padding: 32px 16px 48px;
+    padding: 32px 0 48px;
   }
 
   .agentes__header h1 {
-    font-size: 1.6rem;
+    font-size: 1.45rem;
   }
 
   .agentes__header p {
-    font-size: 0.95rem;
-    margin-bottom: 24px;
+    font-size: 0.88rem;
+    margin-bottom: 20px;
   }
 
   .agentes__endpoint {
-    padding: 16px;
+    align-items: stretch;
+    gap: 12px;
+    padding: 14px;
+  }
+
+  .agentes__url {
+    font-size: 0.78rem;
+    overflow-wrap: anywhere;
+  }
+
+  .agentes__endpoint .agentes__copy {
+    justify-content: center;
+    width: 100%;
   }
 
   .agentes__grid {
     grid-template-columns: 1fr;
+    gap: 16px;
   }
 
   .agentes__card {
-    padding: 16px;
+    padding: 14px;
+  }
+
+  .agentes__tools {
+    gap: 10px;
+  }
+
+  .agentes__tool span,
+  .agentes__hint {
+    font-size: 0.8rem;
+  }
+
+  .agentes__code {
+    padding: 12px;
+    font-size: 0.68rem;
+  }
+
+  .agentes__repo {
+    max-width: 100%;
+    font-size: 0.82rem;
+    overflow-wrap: anywhere;
   }
 }
