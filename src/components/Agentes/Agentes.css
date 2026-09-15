@@ -1,5 +1,6 @@
 .agentes {
   max-width: 980px;
+  width: 100%;
   margin: 0 auto;
   padding: 56px 24px 80px;
 }
@@ -85,9 +86,12 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   gap: 24px;
+  min-width: 0;
 }
 
 .agentes__card {
+  min-width: 0;
+  max-width: 100%;
   background: rgba(255, 255, 255, 0.03);
   border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 10px;
@@ -141,9 +145,12 @@
 
 .agentes__code-wrap {
   position: relative;
+  min-width: 0;
+  max-width: 100%;
 }
 
 .agentes__code {
+  max-width: 100%;
   background: var(--sidebar-2);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 8px;
