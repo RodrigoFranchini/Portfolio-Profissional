@@ -51,6 +51,28 @@ export function createPortfolioServer() {
   return server;
 }
 
+/**
+ * Lista tools, resources e prompts registrados, para a página de apresentação
+ * do GET. Registra num servidor descartável para nunca divergir do real.
+ */
+export function getServerCatalog() {
+  const catalog = { tools: [], resources: [], prompts: [] };
+  const recorder = {
+    registerTool: (name, config) =>
+      catalog.tools.push({ name, description: config.description }),
+    registerResource: (name, uri, config) =>
+      catalog.resources.push({ uri, description: config.description }),
+    registerPrompt: (name, config) =>
+      catalog.prompts.push({ name, description: config.description }),
+  };
+
+  registerResources(recorder);
+  registerTools(recorder);
+  registerPrompts(recorder);
+
+  return catalog;
+}
+
 function registerResources(server) {
   server.registerResource(
     "profile",

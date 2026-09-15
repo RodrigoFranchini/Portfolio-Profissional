@@ -87,8 +87,19 @@ await check("CORS liberado no preflight", async () => {
   return "204 + Access-Control-Allow-Origin";
 });
 
-await check("GET recebe 405 (endpoint é stateless)", async () => {
+await check("GET do navegador recebe a página de apresentação", async () => {
   const response = await fetch(base, { method: "GET" });
+  assert(response.status === 200, `esperava 200, recebi ${response.status}`);
+  const info = await response.json();
+  assert(info.tools?.length === 8, "esperava 8 tools na apresentação");
+  return `200 + ${info.tools.length} tools`;
+});
+
+await check("GET de cliente MCP (SSE) recebe 405 (endpoint é stateless)", async () => {
+  const response = await fetch(base, {
+    method: "GET",
+    headers: { Accept: "text/event-stream" },
+  });
   assert(response.status === 405, `esperava 405, recebi ${response.status}`);
   return "405";
 });

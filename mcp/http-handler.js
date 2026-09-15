@@ -4,7 +4,8 @@
 // Modo stateless: cada requisição cria um servidor e um transporte novos, o que
 // é obrigatório em ambientes serverless, onde não há memória entre invocações.
 import { StreamableHTTPServerTransport } from "@modelcontextprotocol/sdk/server/streamableHttp.js";
-import { createPortfolioServer } from "./server.js";
+import { SERVER_INFO, SITE_URL, getProfile } from "./portfolio.js";
+import { createPortfolioServer, getServerCatalog } from "./server.js";
 
 const CORS_HEADERS = {
   "Access-Control-Allow-Origin": "*",
@@ -28,6 +29,33 @@ function sendJsonRpcError(res, status, code, message) {
   );
 }
 
+/** Descrição legível do endpoint para quem abre a URL no navegador. */
+function sendInfoPage(res) {
+  const { name } = getProfile();
+  const info = {
+    name: SERVER_INFO.name,
+    title: SERVER_INFO.title,
+    version: SERVER_INFO.version,
+    transport: "streamable-http",
+    endpoint: `${SITE_URL}/api/mcp`,
+    authentication: "none",
+    usage:
+      "POST JSON-RPC 2.0: initialize, tools/list, tools/call. Adicione esta URL como conector MCP no seu agente.",
+    ...getServerCatalog(),
+    examplePrompts: [
+      `Quem é ${name} e o que ele já construiu?`,
+      "Quais projetos usam Java?",
+      "Ele já trabalhou com Docker?",
+      `Envie uma mensagem para ${name} sobre uma vaga.`,
+    ],
+    discovery: `${SITE_URL}/.well-known/mcp.json`,
+    website: SITE_URL,
+  };
+
+  res.writeHead(200, { "Content-Type": "application/json; charset=utf-8" });
+  res.end(JSON.stringify(info, null, 2));
+}
+
 /**
  * Lê e faz o parse do corpo quando o runtime ainda não o entregou pronto.
  * A Vercel já popula `req.body`; o node:http local, não.
@@ -48,6 +76,15 @@ export async function handleMcpRequest(req, res) {
 
   if (req.method === "OPTIONS") {
     res.writeHead(204).end();
+    return;
+  }
+
+  // Clientes MCP pedem GET com Accept: text/event-stream para abrir um stream
+  // SSE; sem sessão não há stream, então eles recebem 405 (como manda a spec).
+  // Qualquer outro GET é uma pessoa no navegador: mostra o que é o endpoint.
+  const wantsEventStream = (req.headers.accept || "").includes("text/event-stream");
+  if (req.method === "GET" && !wantsEventStream) {
+    sendInfoPage(res);
     return;
   }
 
